@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://templify.uz',
+    'https://root.templify.uz',
+    'https://www.root.templify.uz',  # Add this if you have a "www" version
+]
 
 # Application definition
 
