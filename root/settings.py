@@ -27,11 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://templify.uz',
-    'https://root.templify.uz',
-    'https://www.root.templify.uz',  # Add this if you have a "www" version
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     'https://templify.uz',
+#     'https://root.templify.uz',
+#     'https://www.root.templify.uz',  # Add this if you have a "www" version
+# ]
 
 # Application definition
 
@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    "corsheaders",
+    # "corsheaders",
     'drf_yasg',
     'rest_framework',
     'rest_framework.authtoken',
@@ -56,7 +56,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
+    # "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -102,6 +102,11 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
 
 
 # Password validation
@@ -124,7 +129,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CORS_ALLOW_ALL_ORIGINS=True
 
-SECURE_SSL_REDIRECT = True
+# SECURE_SSL_REDIRECT = True
+# SECURE_SSL_REDIRECT = False
+
 CORS_ALLOW_METHODS = (
     "DELETE",
     "GET",
@@ -146,12 +153,11 @@ CORS_ALLOW_HEADERS = (
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-SECURE_SSL_REDIRECT = True  # Force all traffic to HTTPS
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-CSRF_COOKIE_SECURE = True  # Ensure CSRF cookie is sent over HTTPS only
-SESSION_COOKIE_SECURE = True  # Ensure session cookie is sent over HTTPS only
-
-
+# SECURE_SSL_REDIRECT = True  # Force all traffic to HTTPS
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# CSRF_COOKIE_SECURE = True  # Ensure CSRF cookie is sent over HTTPS only
+# SESSION_COOKIE_SECURE = True  # Ensure session cookie is sent over HTTPS only
+SECURE_SSL_REDIRECT = False
 
 LANGUAGE_CODE = 'en-us'
 

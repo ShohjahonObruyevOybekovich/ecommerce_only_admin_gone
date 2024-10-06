@@ -31,14 +31,14 @@ class ProductCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['name', 'photos_or_videos','category','price', 'product_comment', 'product_owner']
+        fields = ['name','nameRU',"infoUZ", "infoRU",'photos_or_videos', 'price', 'propertiesUz',"propertiesRU",'product_owner']
         read_only_fields = ['created_at']
 
 
 class ProductUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['name', 'photos_or_videos', 'price', 'product_comment']
+        fields = ['name','nameRU',"infoUZ", "infoRU",'photos_or_videos', 'price', 'propertiesUz',"propertiesRU"]
         read_only_fields = ['created_at', 'product_owner']
 
 class ProductMediaSerializer(serializers.ModelSerializer):
@@ -53,12 +53,7 @@ class ProductListSerializer(serializers.ModelSerializer):
     photos_or_videos = ProductMediaSerializer(many=True, read_only=True)
     class Meta:
         model = Product
-        fields = ['id','name','product_owner', 'photos_or_videos','category' ,'price', 'product_comment','ex_owner_number','ex_owner_tg_username']
-        read_only_fields = ['created_at']
-class ProductListforSavatchaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = ['name']
+        fields = ['name','nameRU',"infoUZ", "infoRU",'photos_or_videos', 'price', 'propertiesUz',"propertiesRU"]
         read_only_fields = ['created_at']
 
 class ProductownerinfoListSerializer(serializers.ModelSerializer):

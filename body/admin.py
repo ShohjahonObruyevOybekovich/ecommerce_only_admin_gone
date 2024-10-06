@@ -1,6 +1,6 @@
 from django.contrib import admin
 from body.models import *
-admin.site.register([Payment,PurchaseHistory,liked,Savatcha])
+# admin.site.register([Payment,PurchaseHistory,liked,Savatcha])
 
 from .models import Product, ProductMedia
 
@@ -23,9 +23,9 @@ class ProductMediaAdmin(admin.ModelAdmin):
 # class Is_homepageAdmin(admin.ModelAdmin):
 #     pass
 
-@admin.register(Versions)
-class VersionsAdmin(admin.ModelAdmin):
-    pass
+# @admin.register(Versions)
+# class VersionsAdmin(admin.ModelAdmin):
+#     pass
 
 @admin.register(SubCategory)
 class SubCategoryAdmin(admin.ModelAdmin):

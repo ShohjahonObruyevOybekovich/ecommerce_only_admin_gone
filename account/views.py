@@ -61,9 +61,9 @@ class ConfirmationCodeAPIView(GenericAPIView):
     def post(self, request, *args, **kwargs):
         email = request.data.get('email')
         # username = request.data.get('username')
-        confirm_code = request.data.get('confirm_code')
+        confirm_code = request.data.get('confirmation_code')
         cached_data = cache.get(email)
-
+        print(email)
         print(confirm_code)
         print(cached_data)
         if cached_data and confirm_code == cached_data['confirmation_code']:

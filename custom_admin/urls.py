@@ -21,5 +21,6 @@ urlpatterns = [
     path('subcategory-create/', SubCategoryCreateAPIView.as_view(), name='subcategory-create'),
     path('subcategory-update/<int:pk>/', SubCategoryUpdateAPIView.as_view(), name='subcategory-update'),
     path('subcategory-delete/<int:pk>/', SubCategoryDeleteAPIView.as_view(), name='subcategory-delete'),
+    path('subcategory-by-category/<int:pk>/',SubCategorybyCategoryListAPIView.as_view(), name='subcategory-by-category'),
 
     ]

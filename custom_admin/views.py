@@ -14,7 +14,8 @@ from body.models import Product, Category, SubCategory
 from body.permissions import IsOwner
 from body.serialize import *
 from custom_admin.serialize import ProductownerinfoListSerializer, ProductCreateSerializer, ProductUpdateSerializer, \
-    CategoryCreateSerializer, CategoryUpdateSerializer, CategoryListSerializer, SubCategoryListSerializer
+    CategoryCreateSerializer, CategoryUpdateSerializer, CategoryListSerializer, SubCategoryListSerializer, \
+    ProductListSerializer, User
 
 
 class ProductMenuAPIView(ListAPIView):
@@ -211,3 +212,14 @@ class SubCategoryListAPIView(ListAPIView):
     django_filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     filterset_fields = ['category']
 
+class SubCategorybyCategoryListAPIView(ListAPIView):
+    queryset = SubCategory.objects.all()
+    serializer_class = SubCategoryListSerializer
+    permission_classes = (IsAuthenticated,IsOwner)
+    authentication_classes = (TokenAuthentication,)
+    search_fields = ['name']
+    django_filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+    filterset_fields = ['category']
+    def get_queryset(self):
+        category_id = self.kwargs.get('pk')
+        return self.queryset.filter(category_id=category_id)

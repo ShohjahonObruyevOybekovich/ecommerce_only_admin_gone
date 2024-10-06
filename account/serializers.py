@@ -16,7 +16,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
 
 class ConfirmationCodeSerializer(serializers.Serializer):
     email = serializers.EmailField()
-    confirm_code = serializers.IntegerField()
+    confirmation_code = serializers.IntegerField()
 
 
 class PasswordResetRequestSerializer(serializers.Serializer):
