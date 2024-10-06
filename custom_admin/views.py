@@ -223,3 +223,27 @@ class SubCategorybyCategoryListAPIView(ListAPIView):
     def get_queryset(self):
         category_id = self.kwargs.get('pk')
         return self.queryset.filter(category_id=category_id)
+
+
+from rest_framework import generics
+# from .models import Category, SubCategory, Product
+# from .serializers import CategorySerializer, SubCategorySerializer, ProductSerializer
+
+class CategoryListCreateView(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    search_fields = ['name']
+    django_filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+
+class SubCategoryListCreateView(generics.ListCreateAPIView):
+    queryset = SubCategory.objects.all()
+    serializer_class = SubCategorySerializer
+    search_fields = ['name']
+    django_filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+
+class ProductListCreateView(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    search_fields = ['name']
+    django_filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+

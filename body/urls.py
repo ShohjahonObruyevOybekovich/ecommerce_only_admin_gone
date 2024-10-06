@@ -32,4 +32,8 @@ urlpatterns = [
     #
     # path('liked-products-create/', LikedProductCreateAPIView.as_view(), name='liked-product-create'),
     # path('get-app-version/',GetAppVersionListAPIView.as_view(), name='get-app-version')
-    ]
+    # path('category-list-create', CategoryListCreateView.as_view(), name='category-list-create'),
+    # path('subcategory-list-create', SubCategoryListCreateView.as_view(), name='subcategory-list-create'),
+    # path('product-list-create', ProductListCreateView.as_view(), name='product-list-create'),
+
+]

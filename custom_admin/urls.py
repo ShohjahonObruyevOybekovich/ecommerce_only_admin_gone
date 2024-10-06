@@ -23,4 +23,7 @@ urlpatterns = [
     path('subcategory-delete/<int:pk>/', SubCategoryDeleteAPIView.as_view(), name='subcategory-delete'),
     path('subcategory-by-category/<int:pk>/',SubCategorybyCategoryListAPIView.as_view(), name='subcategory-by-category'),
 
+    # path('category-list-create',CategoryListCreateView.as_view(), name='category-list-create'),
+    # path('subcategory-list-create',SubCategoryListCreateView.as_view(), name='subcategory-list-create'),
+    # path('product-list-create',ProductListCreateView.as_view(), name='product-list-create'),
     ]

@@ -1,9 +1,9 @@
-# from django.contrib.auth import get_user_model
-# from rest_framework import serializers
-#
-# from custom_admin.serialize import ProductListSerializer
-#
-# User = get_user_model()
+from django.contrib.auth import get_user_model
+from rest_framework import serializers
+
+from custom_admin.serialize import ProductListSerializer
+
+User = get_user_model()
 #
 # class PurchaseHistorySerializer(serializers.ModelSerializer):
 #     user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
@@ -74,3 +74,41 @@
 #         model = Versions
 #         fields = '__all__'
 #         read_only_fields = ['created_at']
+
+
+from rest_framework import serializers
+from .models import Category, SubCategory, Product
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'type']
+
+class SubCategorySerializer(serializers.ModelSerializer):
+    category = serializers.SlugRelatedField(
+        queryset=Category.objects.all(),
+        slug_field='name'  # Fetch category based on name in request
+    )
+
+    class Meta:
+        model = SubCategory
+        fields = ['id', 'name', 'category']
+
+class ProductSerializer(serializers.ModelSerializer):
+    # Use SlugRelatedField for easy lookup or creation
+    category = serializers.SlugRelatedField(
+        queryset=Category.objects.all(),
+        slug_field='name',
+        allow_null=True,
+        required=False
+    )
+    subcategory = serializers.SlugRelatedField(
+        queryset=SubCategory.objects.all(),
+        slug_field='name',
+        allow_null=True,
+        required=False
+    )
+
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'nameRU', 'category', 'subcategory', 'infoUZ', 'infoRU', 'price', 'propertiesUz', 'propertiesRU', 'photos_or_videos', 'product_owner', 'created_at', 'updated_at']
