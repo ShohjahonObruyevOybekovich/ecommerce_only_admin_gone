@@ -129,11 +129,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CORS_ALLOW_ALL_ORIGINS=True
-CSRF_COOKIE_SECURE = True
-
-# SECURE_SSL_REDIRECT = True
-# SECURE_SSL_REDIRECT = False
 
 CORS_ALLOW_METHODS = (
     "DELETE",
@@ -156,11 +151,11 @@ CORS_ALLOW_HEADERS = (
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-# SECURE_SSL_REDIRECT = True  # Force all traffic to HTTPS
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-# CSRF_COOKIE_SECURE = True  # Ensure CSRF cookie is sent over HTTPS only
-# SESSION_COOKIE_SECURE = True  # Ensure session cookie is sent over HTTPS only
-SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = True  # Force all traffic to HTTPS
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+CSRF_COOKIE_SECURE = True  # Ensure CSRF cookie is sent over HTTPS only
+SESSION_COOKIE_SECURE = True  # Ensure session cookie is sent over HTTPS only
+
 
 LANGUAGE_CODE = 'en-us'
 
