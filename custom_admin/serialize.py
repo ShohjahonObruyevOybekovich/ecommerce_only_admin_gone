@@ -68,6 +68,13 @@ class SubCategoryListSerializer(serializers.ModelSerializer):
         fields = ['name','category','created_at']
 
 
+class MediaListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductMedia
+        fields = ['file']
+
+
+
 # class CategorySerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Category

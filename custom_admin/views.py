@@ -1,4 +1,6 @@
 # Create your views here.
+
+
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.authentication import TokenAuthentication
@@ -10,12 +12,12 @@ from rest_framework.generics import (
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated
 
-from body.models import Product, Category, SubCategory
+from body.models import Product, Category, SubCategory, ProductMedia
 from body.permissions import IsOwner
 from body.serialize import *
 from custom_admin.serialize import ProductownerinfoListSerializer, ProductCreateSerializer, ProductUpdateSerializer, \
     CategoryCreateSerializer, CategoryUpdateSerializer, CategoryListSerializer, SubCategoryListSerializer, \
-    ProductListSerializer, User
+    ProductListSerializer, User, MediaListSerializer
 
 
 class ProductMenuAPIView(ListAPIView):
@@ -225,25 +227,61 @@ class SubCategorybyCategoryListAPIView(ListAPIView):
         return self.queryset.filter(category_id=category_id)
 
 
-from rest_framework import generics
-# from .models import Category, SubCategory, Product
-# from .serializers import CategorySerializer, SubCategorySerializer, ProductSerializer
+# from rest_framework import generics
+# # from .models import Category, SubCategory, Product
+# # from .serializers import CategorySerializer, SubCategorySerializer, ProductSerializer
+#
+# class CategoryListCreateView(generics.ListCreateAPIView):
+#     queryset = Category.objects.all()
+#     serializer_class = CategorySerializer
+#     search_fields = ['name']
+#     django_filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+#
+# class SubCategoryListCreateView(generics.ListCreateAPIView):
+#     queryset = SubCategory.objects.all()
+#     serializer_class = SubCategorySerializer
+#     search_fields = ['name']
+#     django_filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+#
+# class ProductListCreateView(generics.ListCreateAPIView):
+#     queryset = Product.objects.all()
+#     serializer_class = ProductSerializer
+#     search_fields = ['name']
+#     django_filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
 
-class CategoryListCreateView(generics.ListCreateAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-    search_fields = ['name']
+class MediaListCreateView(CreateAPIView):
+    queryset = ProductMedia.objects.all()
+    serializer_class = MediaListSerializer
+    search_fields = ['file']
+
+class MediaUpdateAPIView(UpdateAPIView):
+    queryset = ProductMedia.objects.all()
+    serializer_class = MediaListSerializer
+    permission_classes = (IsAuthenticated,IsOwner)
+    authentication_classes = (TokenAuthentication,)
+    def get_object(self):
+        queryset = self.filter_queryset(self.get_queryset())
+        obj = get_object_or_404(queryset, pk=self.kwargs.get('pk'))
+        self.check_object_permissions(self.request, obj)
+        return obj
+
+class MediaDeleteAPIView(DestroyAPIView):
+    queryset = ProductMedia.objects.all()
+    serializer_class = MediaListSerializer
+    permission_classes = (IsAuthenticated,IsOwner)
+    authentication_classes = (TokenAuthentication,)
+    def get_object(self):
+        queryset = self.filter_queryset(self.get_queryset())
+        obj = get_object_or_404(queryset, pk=self.kwargs.get('pk'))
+        self.check_object_permissions(self.request, obj)
+        return obj
+
+
+class MediaListAPIView(ListAPIView):
+    queryset = ProductMedia.objects.all()
+    serializer_class = MediaListSerializer
+    permission_classes = (IsAuthenticated,IsOwner)
+    authentication_classes = (TokenAuthentication,)
+    search_fields = ['file']
     django_filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
-
-class SubCategoryListCreateView(generics.ListCreateAPIView):
-    queryset = SubCategory.objects.all()
-    serializer_class = SubCategorySerializer
-    search_fields = ['name']
-    django_filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
-
-class ProductListCreateView(generics.ListCreateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    search_fields = ['name']
-    django_filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
-
+    filterset_fields = ['file']
