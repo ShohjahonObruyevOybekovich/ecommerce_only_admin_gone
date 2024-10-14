@@ -276,5 +276,5 @@ class MediaListAPIView(ListAPIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
-    filterset_fields = ['product_id']
-    search_fields = ['product_id','file']
+    filterset_fields = ['product_name']
+    search_fields = ['product_name','file']

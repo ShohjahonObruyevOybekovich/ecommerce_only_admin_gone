@@ -25,6 +25,8 @@ class CategoryListSerializer(serializers.ModelSerializer):
         model = Category
         fields = ['id', 'name', 'type', 'created_at']
         read_only_fields = ['id', 'created_at']
+
+
 class ProductCreateSerializer(serializers.ModelSerializer):
     product_owner = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
     # payment = PaymentSerializer()
@@ -33,7 +35,6 @@ class ProductCreateSerializer(serializers.ModelSerializer):
         model = Product
         fields = ['name','nameRU',"infoUZ", "infoRU",'category','subcategory','photos_or_videos', 'price', 'propertiesUz',"propertiesRU",'product_owner']
         read_only_fields = ['created_at']
-
 
 class ProductUpdateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -71,7 +72,7 @@ class SubCategoryListSerializer(serializers.ModelSerializer):
 class MediaListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductMedia
-        fields = ['product_id','file']
+        fields = ["id",'product_name','file']
 
 # class CategorySerializer(serializers.ModelSerializer):
 #     class Meta:
