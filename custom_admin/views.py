@@ -1,6 +1,6 @@
 # Create your views here.
 
-
+# from rest_framework import generics
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.authentication import TokenAuthentication
@@ -252,36 +252,29 @@ class SubCategorybyCategoryListAPIView(ListAPIView):
 class MediaListCreateView(CreateAPIView):
     queryset = ProductMedia.objects.all()
     serializer_class = MediaListSerializer
-    search_fields = ['file']
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
 
+# Update media
 class MediaUpdateAPIView(UpdateAPIView):
     queryset = ProductMedia.objects.all()
     serializer_class = MediaListSerializer
-    permission_classes = (IsAuthenticated,IsOwner)
-    authentication_classes = (TokenAuthentication,)
-    def get_object(self):
-        queryset = self.filter_queryset(self.get_queryset())
-        obj = get_object_or_404(queryset, pk=self.kwargs.get('pk'))
-        self.check_object_permissions(self.request, obj)
-        return obj
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
 
+# Delete media
 class MediaDeleteAPIView(DestroyAPIView):
     queryset = ProductMedia.objects.all()
     serializer_class = MediaListSerializer
-    permission_classes = (IsAuthenticated,IsOwner)
-    authentication_classes = (TokenAuthentication,)
-    def get_object(self):
-        queryset = self.filter_queryset(self.get_queryset())
-        obj = get_object_or_404(queryset, pk=self.kwargs.get('pk'))
-        self.check_object_permissions(self.request, obj)
-        return obj
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
 
-
+# List media with filtering
 class MediaListAPIView(ListAPIView):
     queryset = ProductMedia.objects.all()
     serializer_class = MediaListSerializer
-    permission_classes = (IsAuthenticated,IsOwner)
-    authentication_classes = (TokenAuthentication,)
-    search_fields = ['file']
-    django_filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
-    filterset_fields = ['file']
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+    filterset_fields = ['product_id']
+    search_fields = ['product_id','file']

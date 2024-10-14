@@ -52,19 +52,13 @@ class Product(models.Model):
         return self.name
 
 class ProductMedia(models.Model):
-    id = models.AutoField(primary_key=True,unique=True)
+    id = models.AutoField(primary_key=True, unique=True)
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
     file = models.FileField(upload_to='media/product_media/')
     is_home = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.id}"
-
-class ProductMediaRelationship(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    productmedia = models.ForeignKey(ProductMedia, on_delete=models.CASCADE)
-
-    class Meta:
-        unique_together = ('product', 'productmedia')
+        return f"Media is {self.product_id} 's media file"
 
 
 
