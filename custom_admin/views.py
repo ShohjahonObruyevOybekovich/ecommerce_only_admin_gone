@@ -55,8 +55,8 @@ class ProductByIDAPIView(RetrieveAPIView):
 
 class ProductListforOwnerAPIView(ListAPIView):
     serializer_class = ProductownerinfoListSerializer
-    permission_classes = (IsAuthenticated, IsOwner)
-    authentication_classes = (TokenAuthentication,)
+    # permission_classes = (IsAuthenticated, IsOwner)
+    # authentication_classes = (TokenAuthentication,)
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     filterset_fields = ['category']
     ordering_fields = ['price']
@@ -107,7 +107,7 @@ class ProductDeleteAPIView(DestroyAPIView):
 
 class ProductownerinfoListAPIView(ListAPIView):
     serializer_class = ProductownerinfoListSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     def get_queryset(self):
         product_id = self.kwargs.get('pk')
         print(User.objects.filter(
@@ -179,8 +179,8 @@ class CategoryProductsListAPIView(ListAPIView):
 class SubCategoryCreateAPIView(CreateAPIView):
     queryset = SubCategory.objects.all()
     serializer_class = SubCategoryListSerializer
-    permission_classes = (IsAuthenticated,IsOwner)
-    authentication_classes = (TokenAuthentication,)
+    # permission_classes = (IsAuthenticated,IsOwner)
+    # authentication_classes = (TokenAuthentication,)
 
 class SubCategoryUpdateAPIView(UpdateAPIView):
     queryset = SubCategory.objects.all()
@@ -208,8 +208,8 @@ class SubCategoryDeleteAPIView(DestroyAPIView):
 class SubCategoryListAPIView(ListAPIView):
     queryset = SubCategory.objects.all()
     serializer_class = SubCategoryListSerializer
-    permission_classes = (IsAuthenticated,IsOwner)
-    authentication_classes = (TokenAuthentication,)
+    # permission_classes = (IsAuthenticated,IsOwner)
+    # authentication_classes = (TokenAuthentication,)
     search_fields = ['name']
     django_filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     filterset_fields = ['category']
@@ -217,8 +217,8 @@ class SubCategoryListAPIView(ListAPIView):
 class SubCategorybyCategoryListAPIView(ListAPIView):
     queryset = SubCategory.objects.all()
     serializer_class = SubCategoryListSerializer
-    permission_classes = (IsAuthenticated,IsOwner)
-    authentication_classes = (TokenAuthentication,)
+    # permission_classes = (IsAuthenticated,IsOwner)
+    # authentication_classes = (TokenAuthentication,)
     search_fields = ['name']
     django_filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     filterset_fields = ['category']
@@ -273,8 +273,8 @@ class MediaDeleteAPIView(DestroyAPIView):
 class MediaListAPIView(ListAPIView):
     queryset = ProductMedia.objects.all()
     serializer_class = MediaListSerializer
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [TokenAuthentication]
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     filterset_fields = ['product_name']
     search_fields = ['product_name','file']
