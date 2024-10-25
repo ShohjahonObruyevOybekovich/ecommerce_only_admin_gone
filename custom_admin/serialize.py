@@ -66,7 +66,7 @@ class ProductownerinfoListSerializer(serializers.ModelSerializer):
 class SubCategoryListSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubCategory
-        fields = ['name','category','created_at']
+        fields = ['id','name','category','created_at']
 
 
 class MediaListSerializer(serializers.ModelSerializer):

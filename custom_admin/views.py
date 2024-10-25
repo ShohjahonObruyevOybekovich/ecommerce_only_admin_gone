@@ -171,9 +171,8 @@ class CategoryProductsListAPIView(ListAPIView):
     filterset_fields = ['category']  # Use filterset_fields for exact filtering
 
     def get_queryset(self):
-        category_id = self.kwargs.get('pk') # Access pk from URL parameters
-        return self.queryset.filter(category_id=category_id)
-
+        category_id = self.kwargs.get('pk')  # Access pk from URL parameters
+        return self.queryset.filter(category__id=category_id)
 
 
 class SubCategoryCreateAPIView(CreateAPIView):
