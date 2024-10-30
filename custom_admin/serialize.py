@@ -33,13 +33,15 @@ class ProductCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['name','nameRU',"infoUZ", "infoRU",'category','subcategory','photos_or_videos', 'price', 'propertiesUz',"propertiesRU",'product_owner']
+        fields = ['name','nameRU',"infoUZ", "infoRU",'category','subcategory','photos_or_videos', 'price',
+                  'propertiesUz',"propertiesRU",'product_owner',"vid","sposib_naniseniya",'razmer','oblast_naniseniya','material','ves','na_sklade','articul']
         read_only_fields = ['created_at']
 
 class ProductUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['name','nameRU',"infoUZ", "infoRU",'category','subcategory','photos_or_videos', 'price', 'propertiesUz',"propertiesRU"]
+        fields = ['name','nameRU',"infoUZ", "infoRU",'category','subcategory','photos_or_videos',
+                  'price', 'propertiesUz',"propertiesRU","vid","sposib_naniseniya",'razmer','oblast_naniseniya','material','ves','na_sklade','articul']
         read_only_fields = ['created_at', 'product_owner']
 
 class ProductMediaSerializer(serializers.ModelSerializer):
@@ -54,7 +56,8 @@ class ProductListSerializer(serializers.ModelSerializer):
     photos_or_videos = ProductMediaSerializer(many=True, read_only=True)
     class Meta:
         model = Product
-        fields = ['id','name','nameRU',"infoUZ", "infoRU",'category','subcategory','photos_or_videos', 'price', 'propertiesUz',"propertiesRU"]
+        fields = ['id','name','nameRU',"infoUZ", "infoRU",'category','subcategory','photos_or_videos',
+                  'price', 'propertiesUz',"propertiesRU","vid","sposib_naniseniya",'razmer','oblast_naniseniya','material','ves','na_sklade','articul']
         read_only_fields = ['created_at']
 
 class ProductownerinfoListSerializer(serializers.ModelSerializer):

@@ -3,6 +3,7 @@ from decimal import Decimal
 import uuid
 from django.db import models
 from django.db.models import UniqueConstraint
+from django.forms import JSONField
 from django.utils import timezone
 from account.models import CustomUser
 import json
@@ -44,6 +45,15 @@ class Product(models.Model):
     product_owner = models.ForeignKey(CustomUser, null=True, blank=True, on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
+    vid = models.JSONField(null=True, blank=True)  # Stores list of vids as JSON
+    sposib_naniseniya = models.JSONField(null=True, blank=True)  # Stores list of sposib as JSON
+    razmer = models.JSONField(null=True, blank=True)  # Can store {"Razmer": "string", "Razmer_type": "string"}
+    oblast_naniseniya = models.JSONField(null=True, blank=True)  # Can store {"Oblost": "string", "Oblost_type": "string"}
+    material = models.CharField(max_length=255, null=True, blank=True)
+    ves = models.JSONField(null=True, blank=True)  # Can store {"Ves": "string", "Ves_type": "string"}
+    na_sklade = models.IntegerField(null=True, blank=True)  # Stock count
+    articul = models.CharField(max_length=255, null=True, blank=True)
+
     def save(self, *args, **kwargs):
         self.updated_at = timezone.now()
         super().save(*args, **kwargs)
