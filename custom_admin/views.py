@@ -31,12 +31,6 @@ class ProductMenuAPIView(ListAPIView):
     ordering_fields = ['price']
     search_fields = ['name']
 
-    # def get_queryset(self):
-    #     queryset = super().get_queryset()
-    #     category = self.request.query_params.get('category')
-    #     if category:
-    #         queryset = queryset.filter(category=category)
-    #     return queryset
 
 class ProductByIDAPIView(RetrieveAPIView):
     queryset = Product.objects.all()
