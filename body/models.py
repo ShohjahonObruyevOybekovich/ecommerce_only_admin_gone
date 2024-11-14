@@ -38,7 +38,7 @@ class Product(models.Model):
     subcategory = models.ManyToManyField('SubCategory', null=True, blank=True)
     infoUZ = models.CharField(max_length=255, null=True, blank=True)
     infoRU = models.CharField(max_length=255, null=True, blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    price = models.JSONField(null=True, blank=True)
     propertiesUz=models.CharField(max_length=255, null=True, blank=True)
     propertiesRU=models.CharField(max_length=255, null=True, blank=True)
     photos_or_videos = models.ManyToManyField('ProductMedia',null=True, blank=True)
